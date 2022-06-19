@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Un lienzo para animar</title>
+</head>
+ 
+<body>
+ 
+    <canvas id="canvas" width="400" height="400"></canvas>
+    <script src="https://code.jquery.com/jquery-2.1.0.js"></script>
+    
+    <p id = "dimensiones">Haz Click para saber las Dimensiones de la Figura</p>
+ 
+    <script>
+ 
+    var canvas = document.getElementById("canvas");
+    var ctx = canvas.getContext("2d");
+ 
+     var posicion = 0;
+     var tamano = 0;
+     var color = ["Red", "Green", "Blue", "Skyblue", "Yellow", "Orange"];
+     var clicks = 0;
+     var alto = 400;
+     var largo = 1;
+        
+    setInterval(function () {
+        ctx.clearRect(0, 0, 400, 400);
+        ctx.fillRect(posicion,0 , largo, alto);
+        posicion++;
+        largo++;
+        alto--;
+        
+        if (largo > 400){
+            posicion = 0;
+            tamano = 0;
+            largo = 0;
+            alto = 400;
+        //Cambia color al cumplir condicion IF.
+            ctx.fillStyle = color [Math.floor(Math.random() * color.length)];
+        }
+    }, 30);
+        
+ //Cambia color al hacer Click.
+  $("canvas").click(function(){
+	ctx.fillStyle=color [Math.floor(Math.random() * color.length)];
+      
+ //Presentar texto con sus dimensiones.
+  $("p").text('El Largo de la figura es de = ' + largo + ' y el Alto es = ' + alto);
+ 
+});
+ 
+ 
+ 
+   </script>
+</body>
+</html>
